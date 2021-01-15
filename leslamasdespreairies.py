@@ -1,17 +1,21 @@
- #Rendu de groupe Lamas des Prairies:
-    import random
+import random
 import os
+import logging
+import json
 
 choix_fichier= input("Choissisez le fichier que vous souhaitez ouvrir : ")
 ouvre_fichier = open(choix_fichier,"r", encoding='utf8')
+
 lire_fichier = ouvre_fichier.readlines()
-
-#print(lire_fichier)
-
+groupe_final = []
 nombre_max_pers_groupe = int(input("Combien de nombre de personnes max souhaitez-vous par groupe :"))
 
-pers_fichier = len(lire_fichier)
-print(pers_fichier)
+for prenom in lire_fichier:
+    strip_prenom = prenom.strip()
+    groupe_final.append(strip_prenom)
+
+pers_fichier = len(groupe_final)
+print("Vous êtes : ", pers_fichier, "personnes")
 
 pers_par_groupe = []
 
@@ -20,21 +24,28 @@ if  pers_fichier % nombre_max_pers_groupe == 0 :
     nb_groupes = (pers_fichier//nombre_max_pers_groupe)
 else: 
     nb_groupes = (pers_fichier//nombre_max_pers_groupe)+1
-print(nb_groupes)
-
-# Si le groupe est pleins, remplir un autre groupe et supprimer de la liste promo :
-
-# for personne in range(pers_fichier) :
-#         if personne>0:
-#             pers_par_groupe.extend([pers_par_groupe+1])
-#             pers_fichier-=1
-#             print(personne)
+print("Il y'aura donc ", nb_groupes, "groupes :")
 
 
-#reste à faire :
-#Renvoyer aléatoirement, s' occuper du hasard = .random
-#Renvoyer ce fichier en j.son des groupes repartis "pyhon export j.son file"
-#Packager le script en module ? Liens Abdé
-#Log
+x=1
+while x <= nb_groupes:
+    pers_par_groupe.append([])
+    x +=1
+
+
+i=0
+while i <= nombre_max_pers_groupe:
+    for groupe in pers_par_groupe :  
+        if pers_fichier > 0 :
+            choix_random = random.choice(groupe_final)
+            groupe.append(choix_random)
+            groupe_final.remove(choix_random)
+            pers_fichier=len(groupe_final)
+        
+    i+=1
+
+
+for personne in pers_par_groupe :
+    print(f"Groupe :{personne}")
 
 
