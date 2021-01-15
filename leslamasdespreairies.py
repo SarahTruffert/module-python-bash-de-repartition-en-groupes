@@ -5,6 +5,10 @@ import json
 
 choix_fichier= input("Choissisez le fichier que vous souhaitez ouvrir : ")
 ouvre_fichier = open(choix_fichier,"r", encoding='utf8')
+nom_equipe = open("equipe.txt","r", encoding='utf8')
+lire_nom_equipe = nom_equipe.readlines()
+
+#equipe = shuffle.nom_equipe()
 
 lire_fichier = ouvre_fichier.readlines()
 groupe_final = []
@@ -48,10 +52,11 @@ while i <= nombre_max_pers_groupe:
 
 for personne in pers_par_groupe :
 
-    log_final = f"Groupe :{personne}"
+    log_final = f"{personne}"
     with open("log.json", 'a') as f:
         json.dump(log_final, f)
     e = open ("log.txt",'a')
     e.writelines(log_final)
     e.close()
-    print(log_final)
+    equipe_random = random.choice(lire_nom_equipe)
+    print(equipe_random,log_final)
