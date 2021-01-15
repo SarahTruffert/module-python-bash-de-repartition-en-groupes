@@ -27,6 +27,7 @@ else:
 print("Il y'aura donc ", nb_groupes, "groupes :")
 
 
+
 x=1
 while x <= nb_groupes:
     pers_par_groupe.append([])
@@ -46,6 +47,11 @@ while i <= nombre_max_pers_groupe:
 
 
 for personne in pers_par_groupe :
-    print(f"Groupe :{personne}")
 
-
+    log_final = f"Groupe :{personne}"
+    with open("log.json", 'a') as f:
+        json.dump(log_final, f)
+    e = open ("log.txt",'a')
+    e.writelines(log_final)
+    e.close()
+    print(log_final)
