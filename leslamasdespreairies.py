@@ -53,8 +53,8 @@ while i <= nombre_max_pers_groupe:
 for personne in pers_par_groupe :
 
     log_final = f"{personne}"
-    with open("log.json", 'a') as f:
-        json.dump(log_final, f)
+    with open("log.json", 'a',encoding='utf8') as f:
+        json.dump(log_final, f,ensure_ascii=False)
     e = open ("log.txt",'a')
     e.writelines(log_final)
     e.close()
