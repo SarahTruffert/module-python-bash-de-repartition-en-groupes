@@ -1,6 +1,5 @@
 import random
 import os
-import logging
 import json
 
 choix_fichier= input("Choissisez le fichier que vous souhaitez ouvrir : ")
